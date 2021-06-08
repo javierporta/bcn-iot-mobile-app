@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 import { Card } from "react-native-elements";
+import { API_URL } from "../consts/apiUrls";
 
 interface SensorCurrentValuesProps {
   mac: string;
@@ -25,7 +26,7 @@ const SensorCurrentValues = ({
   const getSensorCurrentValues = () => {
     axios
       .get<TemperatureAndHumiditySensor>(
-        `https://localhost:44327/api/TemperatureHumiditySensors/${mac}?clientId=oifjweweo%24ineogsef27r3893r_273y2huiwfeg`, //todo set key in a const
+        `${API_URL}/api/TemperatureHumiditySensors/${mac}?clientId=oifjweweo%24ineogsef27r3893r_273y2huiwfeg`, //todo set key in a const
         {
           headers: {
             "Content-Type": "application/json",
@@ -42,7 +43,10 @@ const SensorCurrentValues = ({
     getSensorCurrentValues();
   }, []);
 
-  const getFormattedTime = (date: Date): string => {
+  const getFormattedTime = (date: Date | undefined): string => {
+    if (date === undefined) {
+      return "";
+    }
     let formmatedDate = new Date(thData!.timestamp);
     formmatedDate.setHours(formmatedDate.getHours() - 1); // correct hour
     const formmatedDateFromNow = moment(formmatedDate).fromNow();
@@ -79,7 +83,7 @@ const SensorCurrentValues = ({
             <Card>
               <Card.Title>Last Update</Card.Title>
               <Card.Divider />
-              <Text>{getFormattedTime(thData!.timestamp)}</Text>
+              <Text>{getFormattedTime(thData?.timestamp)}</Text>
             </Card>
           </View>
         </>

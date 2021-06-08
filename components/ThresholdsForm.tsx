@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
+import { API_URL } from "../consts/apiUrls";
 
 const ThresholdsForm = ({}): ReactElement => {
   const [isLoading, setLoading] = useState(true);
@@ -24,7 +25,7 @@ const ThresholdsForm = ({}): ReactElement => {
   const getClientData = () => {
     axios
       .get<Client>(
-        "https://localhost:44327/api/Clients/oifjweweo%24ineogsef27r3893r_273y2huiwfeg",
+        `${API_URL}/api/Clients/oifjweweo%24ineogsef27r3893r_273y2huiwfeg`,
         {
           headers: {
             "Content-Type": "application/json",

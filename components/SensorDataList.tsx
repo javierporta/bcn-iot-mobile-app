@@ -12,6 +12,7 @@ import {
   View,
   VirtualizedList,
 } from "react-native";
+import { API_URL } from "../consts/apiUrls";
 import { RootStackParamList, TabOneParamList } from "../types";
 
 type TabOneScreenNavigationProp = StackNavigationProp<
@@ -30,7 +31,7 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
   const getAllSensorsRegisteredByClient = () => {
     axios
       .get<Client>(
-        "https://localhost:44327/api/Clients/oifjweweo%24ineogsef27r3893r_273y2huiwfeg",
+        `${API_URL}/api/Clients/oifjweweo%24ineogsef27r3893r_273y2huiwfeg`,
         {
           headers: {
             "Content-Type": "application/json",
