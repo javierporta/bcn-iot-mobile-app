@@ -3,28 +3,32 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
+import SensorCurrentValues from "../components/SensorCurrentValues";
 import SensorDataList from "../components/SensorDataList";
 import { Text, View } from "../components/Themed";
-import { RootStackParamList, TabOneParamList } from "../types";
+import { TabOneParamList } from "../types";
 
-type TabOneScreenNavigationProp = StackNavigationProp<
+type SensorDetailScreenNavigationProp = StackNavigationProp<
   TabOneParamList,
-  "TabOneScreen"
+  "SensorDetailScreen"
 >;
-interface TabOneScreenProps {
-  navigation: TabOneScreenNavigationProp;
+
+interface SensorDetailScreenProp {
+  route: any;
+  navigation: SensorDetailScreenNavigationProp;
 }
 
-export default function TabOneScreen({ navigation }: TabOneScreenProps) {
+export default function SensorDetailScreen({
+  route,
+  navigation,
+}: SensorDetailScreenProp) {
+  const { mac } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <SensorDataList navigation={navigation}></SensorDataList>
+      <Text style={styles.title}>This is the detail! </Text>
+      <Text>mac is {mac}</Text>
+      <SensorCurrentValues mac={mac}></SensorCurrentValues>
     </View>
   );
 }

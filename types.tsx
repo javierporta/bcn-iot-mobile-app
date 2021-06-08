@@ -11,12 +11,18 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
+  TabThreshold: undefined;
 };
 
 export type TabOneParamList = {
   TabOneScreen: undefined;
+  SensorDetailScreen: undefined;
 };
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
+};
+
+export type TabThresholdParamList = {
+  TabThresholdScreen: undefined;
 };
