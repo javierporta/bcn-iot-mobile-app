@@ -21,6 +21,7 @@ const SensorsHistoryList = (): ReactElement => {
     useState<TemperatureAndHumiditySensor[]>();
 
   const getSensorsHistoryByClient = () => {
+    setLoading(true);
     axios
       .get<TemperatureAndHumiditySensor[]>(
         `${API_URL}/api/TemperatureHumiditySensors?clientId=oifjweweo%24ineogsef27r3893r_273y2huiwfeg`,
@@ -39,17 +40,6 @@ const SensorsHistoryList = (): ReactElement => {
   useEffect(() => {
     getSensorsHistoryByClient();
   }, []);
-
-  const getItem = (data: string[], index: number) => ({
-    id: Math.random().toString(12).substring(0),
-    title: `${data[index]}`,
-  });
-
-  const getItemCount = (data: string[]) => data.length;
-
-  interface ItemProps {
-    title: string;
-  }
 
   const Item = ({ ...data }: TemperatureAndHumiditySensor) => (
     <View style={styles.item}>
@@ -78,6 +68,10 @@ const SensorsHistoryList = (): ReactElement => {
     />
   );
 
+  const onRefresh = () => {
+    getSensorsHistoryByClient();
+  };
+
   return (
     <>
       <Text>Sensors History</Text>
@@ -99,6 +93,8 @@ const SensorsHistoryList = (): ReactElement => {
                 data={sensorsHistoryData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
+                onRefresh={() => onRefresh()}
+                refreshing={isLoading}
               />
             </SafeAreaView>
           </View>
