@@ -10,28 +10,20 @@ import {
   StyleSheet,
   Text,
   View,
-  VirtualizedList,
 } from "react-native";
+import { ListItem } from "react-native-elements/dist/list/ListItem";
 import { API_URL } from "../consts/apiUrls";
 import { RootStackParamList, TabOneParamList } from "../types";
 
-type TabOneScreenNavigationProp = StackNavigationProp<
-  TabOneParamList,
-  "TabOneScreen"
->;
-
-interface SensorDataListProps {
-  navigation: TabOneScreenNavigationProp;
-}
-
-const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
+const SensorsHistoryList = (): ReactElement => {
   const [isLoading, setLoading] = useState(true);
-  const [clientData, setClientData] = useState<Client>();
+  const [sensorsHistoryData, setSensorsHistoryData] =
+    useState<TemperatureAndHumiditySensor[]>();
 
-  const getAllSensorsRegisteredByClient = () => {
+  const getSensorsHistoryByClient = () => {
     axios
-      .get<Client>(
-        `${API_URL}/api/Clients/oifjweweo%24ineogsef27r3893r_273y2huiwfeg`,
+      .get<TemperatureAndHumiditySensor[]>(
+        `${API_URL}/api/TemperatureHumiditySensors?clientId=oifjweweo%24ineogsef27r3893r_273y2huiwfeg`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -39,13 +31,13 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
         }
       )
       .then((response) => {
-        const clientsData = response.data;
-        setClientData(clientsData);
+        const data = response.data;
+        setSensorsHistoryData(data);
       })
       .finally(() => setLoading(false));
   };
   useEffect(() => {
-    getAllSensorsRegisteredByClient();
+    getSensorsHistoryByClient();
   }, []);
 
   const getItem = (data: string[], index: number) => ({
@@ -59,15 +51,12 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
     title: string;
   }
 
-  const goToDetailsScreen = (title: string) => {
-    navigation.push("SensorDetailScreen", { mac: title });
-  };
-
-  const Item = ({ title }: ItemProps) => (
+  const Item = ({ ...data }: TemperatureAndHumiditySensor) => (
     <View style={styles.item}>
-      <Text style={styles.title} onPress={() => goToDetailsScreen(title)}>
-        {title}
-      </Text>
+      <Text style={styles.title}>{data.mac}</Text>
+      <Text style={styles.title}>{data.temperature}</Text>
+      <Text style={styles.title}>{data.humidity}</Text>
+      <Text style={styles.title}>{data.timestamp}</Text>
     </View>
   );
 
@@ -79,11 +68,19 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
     title: string;
   }
 
-  const renderItem = ({ item }: RenderItemProps) => <Item title={item.title} />;
+  const renderItem = ({ item }: { item: TemperatureAndHumiditySensor }) => (
+    <Item
+      id={item.id}
+      mac={item.mac}
+      humidity={item.humidity}
+      temperature={item.temperature}
+      timestamp={item.timestamp}
+    />
+  );
 
   return (
     <>
-      <Text>Hola! {clientData?.name}</Text>
+      <Text>Sensors History</Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -98,13 +95,10 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
             }}
           >
             <SafeAreaView style={styles.cards}>
-              <VirtualizedList
-                data={clientData?.registeredDevices}
-                initialNumToRender={3}
+              <FlatList
+                data={sensorsHistoryData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
-                getItemCount={getItemCount}
-                getItem={getItem}
               />
             </SafeAreaView>
           </View>
@@ -137,4 +131,4 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
-export default SensorDataList;
+export default SensorsHistoryList;
