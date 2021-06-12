@@ -19,8 +19,9 @@ const ThresholdsForm = ({}): ReactElement => {
   const [isLoading, setLoading] = useState(true);
   const [clientData, setClientData] = useState<Client>();
 
-  const [highTemp, onChangeHighTemp] = useState<string>("");
-  const [lowTemp, onChangeLowTemp] = useState<string>("");
+  const [highTemp, onChangeHighTemp] = useState<string>();
+  const [lowTemp, onChangeLowTemp] = useState<string>();
+  const [clientName, onChangeClientName] = useState<string>();
 
   const getClientData = () => {
     axios
@@ -37,15 +38,34 @@ const ThresholdsForm = ({}): ReactElement => {
         setClientData(clientsData);
         onChangeHighTemp(response.data.temperatureHighThreshold.toString());
         onChangeLowTemp(response.data.temperatureLowThreshold.toString());
+        onChangeClientName(response.data.name);
       })
       .finally(() => setLoading(false));
   };
+
+  const updateClientData = (clientToUpdate: ClientToUpdate) => {
+    axios
+      .put<Client>(`${API_URL}/api/Clients/${clientData?.id}`, {
+        ...clientToUpdate,
+      })
+      .then((response) => {
+        alert("Update ok"); ////ToDo look for a fancier way
+      })
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
     getClientData();
   }, []);
 
   const updateThresholds = () => {
-    alert("not implemented");
+    const clientToUpdate = {
+      name: clientName,
+      temperatureHighThreshold: Number(highTemp),
+      temperatureLowThreshold: Number(lowTemp),
+    } as ClientToUpdate;
+
+    updateClientData(clientToUpdate);
   };
 
   return (
@@ -55,8 +75,16 @@ const ThresholdsForm = ({}): ReactElement => {
       ) : (
         <>
           <View>This is the form</View>
+          <Text>{clientData?.name}</Text>
           <Text>{clientData?.temperatureHighThreshold}</Text>
           <Text>{clientData?.temperatureLowThreshold}</Text>
+
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeClientName}
+            value={clientName}
+            placeholder="Client Name"
+          />
 
           <TextInput
             style={styles.input}
@@ -76,7 +104,7 @@ const ThresholdsForm = ({}): ReactElement => {
 
           <Button
             onPress={updateThresholds}
-            title="Update Thresholds"
+            title="Update My Data"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
           />

@@ -46,7 +46,7 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
   };
   useEffect(() => {
     getAllSensorsRegisteredByClient();
-  }, []);
+  });
 
   const getItem = (data: string[], index: number) => ({
     id: Math.random().toString(12).substring(0),
