@@ -74,40 +74,42 @@ const ThresholdsForm = ({}): ReactElement => {
         <ActivityIndicator />
       ) : (
         <>
-          <View>This is the form</View>
-          <Text>{clientData?.name}</Text>
-          <Text>{clientData?.temperatureHighThreshold}</Text>
-          <Text>{clientData?.temperatureLowThreshold}</Text>
+          <View>
+            <Text>This is the form</Text>
+            <Text>{clientData?.name}</Text>
+            <Text>{clientData?.temperatureHighThreshold}</Text>
+            <Text>{clientData?.temperatureLowThreshold}</Text>
 
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeClientName}
-            value={clientName}
-            placeholder="Client Name"
-          />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeClientName}
+              value={clientName}
+              placeholder="Client Name"
+            />
 
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeHighTemp}
-            value={highTemp}
-            placeholder="High Temperature Threshold"
-            keyboardType="numeric"
-          />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeHighTemp}
+              value={highTemp}
+              placeholder="High Temperature Threshold"
+              keyboardType="numeric"
+            />
 
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeLowTemp}
-            value={lowTemp}
-            placeholder="Low Temperature Threshold"
-            keyboardType="numeric"
-          />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeLowTemp}
+              value={lowTemp}
+              placeholder="Low Temperature Threshold"
+              keyboardType="numeric"
+            />
 
-          <Button
-            onPress={updateThresholds}
-            title="Update My Data"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
+            <Button
+              onPress={updateThresholds}
+              title="Update My Data"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
         </>
       )}
     </>

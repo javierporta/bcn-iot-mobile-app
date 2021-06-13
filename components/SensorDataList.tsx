@@ -53,7 +53,7 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
     title: `${data[index]}`,
   });
 
-  const getItemCount = (data: string[]) => data.length;
+  const getItemCount = (data: string[]) => (data ? data.length : 0);
 
   interface ItemProps {
     title: string;

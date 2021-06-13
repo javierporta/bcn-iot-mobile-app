@@ -1,32 +1,44 @@
 {
   "expo": {
-    "name": "bcn-iot-mobile-app",
-    "slug": "bcn-iot-mobile-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/images/adaptive-icon.png"
+      }
+    },
+    "assetBundlePatterns": ["**/*"],
     "icon": "./assets/images/icon.png",
+    "ios": {
+      "supportsTablet": true
+    },
+    "name": "bcn-iot-mobile-app",
+    "orientation": "portrait",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#ffffff",
+          "icon": "./local/path/to/myNotificationIcon.png",
+          "mode": "production",
+          "sounds": [
+            "./local/path/to/mySound.wav",
+            "./local/path/to/myOtherSound.wav"
+          ]
+        }
+      ]
+    ],
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "slug": "bcn-iot-mobile-app",
     "splash": {
+      "backgroundColor": "#ffffff",
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "contain"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
+    "userInterfaceStyle": "automatic",
+    "version": "1.0.0",
     "web": {
       "favicon": "./assets/images/favicon.png"
     }
