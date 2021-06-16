@@ -7,23 +7,19 @@ import SensorDataList from "../components/SensorDataList";
 import { Text, View } from "../components/Themed";
 import { RootStackParamList, TabOneParamList } from "../types";
 
-type TabOneScreenNavigationProp = StackNavigationProp<
+type TabSensorsListScreenNavigationProp = StackNavigationProp<
   TabOneParamList,
-  "TabOneScreen"
+  "TabSensorsListScreen"
 >;
-interface TabOneScreenProps {
-  navigation: TabOneScreenNavigationProp;
+interface TabSensorsListScreenProps {
+  navigation: TabSensorsListScreenNavigationProp;
 }
 
-export default function TabOneScreen({ navigation }: TabOneScreenProps) {
+export default function TabSensorsListScreen({
+  navigation,
+}: TabSensorsListScreenProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
       <SensorDataList navigation={navigation}></SensorDataList>
     </View>
   );

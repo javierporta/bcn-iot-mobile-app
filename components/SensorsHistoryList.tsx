@@ -74,12 +74,10 @@ const SensorsHistoryList = (): ReactElement => {
 
   return (
     <>
-      <Text>Sensors History</Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <>
-          <Text>Your devices</Text>
           <View
             style={{
               flex: 1,

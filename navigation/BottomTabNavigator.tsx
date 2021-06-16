@@ -11,7 +11,7 @@ import * as React from "react";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import SensorDetailScreen from "../screens/SensorDetailScreen";
-import TabOneScreen from "../screens/TabOneScreen";
+import TabSensorsListScreen from "../screens/TabSensorsListScreen";
 import TabThresholdScreen from "../screens/TabThresholdScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import {
@@ -24,38 +24,34 @@ import {
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  const colorScheme = "light";
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Sensors"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
-        name="TabOne"
+        name="Sensors"
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="thermometer-sharp" color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="History"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabThreshold"
+        name="Profile"
         component={TabThresholdNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -63,7 +59,7 @@ export default function BottomTabNavigator() {
 }
 
 // You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
+// https://icons.expsensoso.fyi/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
@@ -79,9 +75,9 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: "Sensor's data" }}
+        name="TabSensorsListScreen"
+        component={TabSensorsListScreen}
+        options={{ headerTitle: "My List of Sensors" }}
       />
       <TabOneStack.Screen
         name="SensorDetailScreen"
@@ -100,7 +96,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={{ headerTitle: "All sensors history" }}
       />
     </TabTwoStack.Navigator>
   );
@@ -114,7 +110,7 @@ function TabThresholdNavigator() {
       <TabThresholdStack.Screen
         name="TabThresholdScreen"
         component={TabThresholdScreen}
-        options={{ headerTitle: "Thresholds" }}
+        options={{ headerTitle: "My Profile" }}
       />
     </TabThresholdStack.Navigator>
   );

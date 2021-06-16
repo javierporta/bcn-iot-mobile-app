@@ -37,7 +37,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "version": "1.0.0",
     "web": {
       "favicon": "./assets/images/favicon.png"

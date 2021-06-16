@@ -22,7 +22,6 @@ export default function TabThresholdScreen({
 }: SensorDetailScreenProp) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Thresholds</Text>
       <ThresholdsForm></ThresholdsForm>
     </View>
   );

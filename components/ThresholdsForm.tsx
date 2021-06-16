@@ -14,6 +14,7 @@ import {
 import { Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import { API_URL } from "../consts/apiUrls";
+import { MonoText } from "./StyledText";
 
 const ThresholdsForm = ({}): ReactElement => {
   const [isLoading, setLoading] = useState(true);
@@ -75,11 +76,7 @@ const ThresholdsForm = ({}): ReactElement => {
       ) : (
         <>
           <View>
-            <Text>This is the form</Text>
-            <Text>{clientData?.name}</Text>
-            <Text>{clientData?.temperatureHighThreshold}</Text>
-            <Text>{clientData?.temperatureLowThreshold}</Text>
-
+            <MonoText>Client Name</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeClientName}
@@ -87,6 +84,7 @@ const ThresholdsForm = ({}): ReactElement => {
               placeholder="Client Name"
             />
 
+            <MonoText>Temperature High Threshold</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeHighTemp}
@@ -95,6 +93,7 @@ const ThresholdsForm = ({}): ReactElement => {
               keyboardType="numeric"
             />
 
+            <MonoText>Temperature Low Threshold</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeLowTemp}

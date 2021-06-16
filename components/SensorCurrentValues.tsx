@@ -55,8 +55,6 @@ const SensorCurrentValues = ({
 
   return (
     <>
-      <Text>Mac</Text>
-      <Text>{mac}</Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (

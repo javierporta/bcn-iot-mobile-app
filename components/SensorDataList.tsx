@@ -14,14 +14,15 @@ import {
 } from "react-native";
 import { API_URL } from "../consts/apiUrls";
 import { RootStackParamList, TabOneParamList } from "../types";
+import { MonoText } from "./StyledText";
 
-type TabOneScreenNavigationProp = StackNavigationProp<
+type TabSensorsListScreenNavigationProp = StackNavigationProp<
   TabOneParamList,
-  "TabOneScreen"
+  "TabSensorsListScreen"
 >;
 
 interface SensorDataListProps {
-  navigation: TabOneScreenNavigationProp;
+  navigation: TabSensorsListScreenNavigationProp;
 }
 
 const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
@@ -83,12 +84,12 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
 
   return (
     <>
-      <Text>Hola! {clientData?.name}</Text>
+      <MonoText>Hey {clientData?.name}!</MonoText>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <>
-          <Text>Your devices</Text>
+          <MonoText>These are your devices</MonoText>
           <View
             style={{
               flex: 1,
@@ -126,12 +127,15 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
   item: {
-    backgroundColor: "#f9c2ff",
     height: 150,
     justifyContent: "center",
     marginVertical: 8,
     marginHorizontal: 16,
     padding: 20,
+    borderRadius: 10,
+    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
+    transition: "all 0.5s",
+    backgroundColor: "#3fbafe",
   },
   title: {
     fontSize: 32,
