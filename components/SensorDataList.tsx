@@ -1,5 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactElement, useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -65,10 +66,13 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
   };
 
   const Item = ({ title }: ItemProps) => (
-    <View style={styles.item}>
-      <Text style={styles.title} onPress={() => goToDetailsScreen(title)}>
-        {title}
-      </Text>
+    <View>
+      <LinearGradient colors={["#1fe4f5", "#3fbafe"]} style={styles.item}>
+        <Text style={styles.subtitle}>MAC</Text>
+        <Text style={styles.title} onPress={() => goToDetailsScreen(title)}>
+          {title}
+        </Text>
+      </LinearGradient>
     </View>
   );
 
@@ -135,10 +139,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
     transition: "all 0.5s",
-    backgroundColor: "#3fbafe",
   },
+
   title: {
     fontSize: 32,
+    fontFamily: "space-mono",
+    color: "#fff",
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 16,
+    fontFamily: "space-mono",
+    color: "#fff",
+    textAlign: "center",
   },
 });
 export default SensorDataList;
