@@ -104,7 +104,7 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
       ) : (
         <>
           <MonoText style={styles.title}>
-            Hey <strong>{clientData?.name}</strong>!
+            Hey <Text style={styles.boldText}>{clientData?.name}</Text>!
           </MonoText>
           <MonoText style={styles.subTitle}>These are your devices</MonoText>
           <View style={styles.separator} />
@@ -145,8 +145,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     padding: 20,
     borderRadius: 10,
-    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
-    transition: "all 0.5s",
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowOffset: { width: 2, height: 2 }, //0 6
+    shadowRadius: 10,
   },
   title: {
     fontSize: 26,
@@ -173,6 +174,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 1,
     width: "80%",
+  },
+  boldText: {
+    fontWeight: "bold",
   },
 });
 export default SensorDataList;

@@ -14,6 +14,7 @@ import {
   View,
 } from "react-native";
 import { Card } from "react-native-elements";
+import { BorderlessButton } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import { API_URL } from "../consts/apiUrls";
 import { TabBarIcon } from "../navigation/BottomTabNavigator";
@@ -66,7 +67,7 @@ const SensorCurrentValues = ({
         <>
           <MonoText style={styles.title}>Sensor</MonoText>
           <Text style={styles.title}>
-            MAC <strong>{mac}</strong>
+            MAC <Text style={styles.boldText}>{mac}</Text>
           </Text>
           <View style={styles.separator} />
           <ScrollView>
@@ -137,6 +138,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 1,
     width: "80%",
+  },
+  boldText: {
+    fontWeight: "bold",
   },
 });
 

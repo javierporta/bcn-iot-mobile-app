@@ -48,22 +48,22 @@ const SensorsHistoryList = (): ReactElement => {
 
   const Item = ({ ...data }: TemperatureAndHumiditySensor) => (
     <LinearGradient colors={["#1fe4f5", "#3fbafe"]} style={styles.item}>
-      <MonoText style={styles.title}>
+      <MonoText style={styles.cardTitle}>
         <TabBarIcon name="hardware-chip-outline" color="#fff" />
         <View style={styles.separator}></View>
         {data.mac}
       </MonoText>
-      <MonoText style={styles.title}>
+      <MonoText style={styles.cardTitle}>
         <TabBarIcon name="thermometer-outline" color="#fff" />
         <View style={styles.separator}></View>
         {data.temperature}ºC
       </MonoText>
-      <MonoText style={styles.title}>
+      <MonoText style={styles.cardTitle}>
         <TabBarIcon name="cloud-circle-outline" color="#fff" />
         <View style={styles.separator}></View>
         {data.humidity}%
       </MonoText>
-      <MonoText style={styles.title}>
+      <MonoText style={styles.cardTitle}>
         <TabBarIcon name="time-outline" color="#fff" />
         <View style={styles.separator}></View>
         {moment(data.timestamp).format("DD/MM/YYYY hh:mm:ss")}
@@ -99,6 +99,7 @@ const SensorsHistoryList = (): ReactElement => {
         <ActivityIndicator />
       ) : (
         <>
+          <MonoText style={styles.title}>Last 100 entries</MonoText>
           <View
             style={{
               flex: 1,
@@ -135,18 +136,19 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
   item: {
-    height: 200,
+    height: 190,
     justifyContent: "center",
     marginVertical: 8,
     marginHorizontal: 16,
     padding: 20,
     borderRadius: 10,
-    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
-    transition: "all 0.5s",
+  },
+  cardTitle: {
+    fontSize: 22,
+    color: "#fff",
   },
   title: {
     fontSize: 26,
-    color: "#fff",
   },
   separator: {
     width: 10,
