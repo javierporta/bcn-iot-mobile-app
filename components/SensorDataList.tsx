@@ -94,6 +94,10 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
 
   const renderItem = ({ item }: RenderItemProps) => <Item title={item.title} />;
 
+  const onRefresh = () => {
+    getAllSensorsRegisteredByClient();
+  };
+
   return (
     <>
       {isLoading ? (
@@ -124,6 +128,8 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
                 keyExtractor={(item) => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
+                onRefresh={() => onRefresh()}
+                refreshing={isLoading}
               />
             </SafeAreaView>
           </View>
