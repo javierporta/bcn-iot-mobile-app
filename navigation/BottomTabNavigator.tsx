@@ -60,7 +60,7 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expsensoso.fyi/
-function TabBarIcon(props: {
+export function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
@@ -82,7 +82,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="SensorDetailScreen"
         component={SensorDetailScreen}
-        options={{ headerTitle: "Sensor Detail Title" }}
+        options={{ headerTitle: "Sensor Detail" }}
       />
     </TabOneStack.Navigator>
   );

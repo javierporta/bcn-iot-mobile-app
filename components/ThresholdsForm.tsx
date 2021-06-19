@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
+import Colors from "../constants/Colors";
 import { API_URL } from "../consts/apiUrls";
 import { MonoText } from "./StyledText";
 
@@ -76,7 +77,7 @@ const ThresholdsForm = ({}): ReactElement => {
       ) : (
         <>
           <View>
-            <MonoText>Client Name</MonoText>
+            <MonoText style={styles.label}>Client Name</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeClientName}
@@ -84,7 +85,7 @@ const ThresholdsForm = ({}): ReactElement => {
               placeholder="Client Name"
             />
 
-            <MonoText>Temperature High Threshold</MonoText>
+            <MonoText style={styles.label}>Temperature High Threshold</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeHighTemp}
@@ -93,7 +94,7 @@ const ThresholdsForm = ({}): ReactElement => {
               keyboardType="numeric"
             />
 
-            <MonoText>Temperature Low Threshold</MonoText>
+            <MonoText style={styles.label}>Temperature Low Threshold</MonoText>
             <TextInput
               style={styles.input}
               onChangeText={onChangeLowTemp}
@@ -105,8 +106,8 @@ const ThresholdsForm = ({}): ReactElement => {
             <Button
               onPress={updateThresholds}
               title="Update My Data"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
+              color={Colors.light.tint}
+              accessibilityLabel="Update my data"
             />
           </View>
         </>
@@ -126,6 +127,8 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
+    textAlign: "center",
+    fontSize: 20,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -137,6 +140,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  label: {
+    textAlign: "center",
+    fontSize: 22,
   },
 });
 

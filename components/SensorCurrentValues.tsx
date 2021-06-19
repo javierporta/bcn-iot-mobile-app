@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import React, { ReactElement, useEffect, useState } from "react";
 import {
@@ -6,13 +7,17 @@ import {
   Button,
   FlatList,
   SafeAreaView,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import { Card } from "react-native-elements";
+import Colors from "../constants/Colors";
 import { API_URL } from "../consts/apiUrls";
+import { TabBarIcon } from "../navigation/BottomTabNavigator";
+import { MonoText } from "./StyledText";
 
 interface SensorCurrentValuesProps {
   mac: string;
@@ -59,31 +64,43 @@ const SensorCurrentValues = ({
         <ActivityIndicator />
       ) : (
         <>
-          <View>
+          <MonoText style={styles.title}>Sensor</MonoText>
+          <Text style={styles.title}>
+            MAC <strong>{mac}</strong>
+          </Text>
+          <View style={styles.separator} />
+          <ScrollView>
             <Card>
               <Card.Title>Temperature</Card.Title>
               <Card.Divider />
-              {/* <Card.Image source={require("..assets/images/splash.png")}>
-                <Text style={{ marginBottom: 10 }}>
-                  The idea with React Native Elements is more about component
-                  structure than actual design.
-                </Text>
-              </Card.Image> */}
-              <Text>{thData?.temperature}</Text>
+              <Text style={styles.cardText}>
+                <TabBarIcon name="thermometer" color={Colors.light.tint} />
+              </Text>
+              <MonoText style={styles.cardText}>
+                {thData?.temperature}ºC
+              </MonoText>
             </Card>
 
             <Card>
               <Card.Title>Humidity</Card.Title>
               <Card.Divider />
-              <Text>{thData?.humidity}</Text>
+              <Text style={styles.cardText}>
+                <TabBarIcon name="cloud-circle" color={Colors.light.tint} />
+              </Text>
+              <MonoText style={styles.cardText}>{thData?.humidity}%</MonoText>
             </Card>
 
             <Card>
               <Card.Title>Last Update</Card.Title>
               <Card.Divider />
-              <Text>{getFormattedTime(thData?.timestamp)}</Text>
+              <Text style={styles.cardText}>
+                <TabBarIcon name="time" color={Colors.light.tint} />
+              </Text>
+              <MonoText style={styles.cardText}>
+                {getFormattedTime(thData?.timestamp)}
+              </MonoText>
             </Card>
-          </View>
+          </ScrollView>
         </>
       )}
     </>
@@ -110,7 +127,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 32,
+    fontSize: 26,
+  },
+  cardText: {
+    textAlign: "center",
+    fontSize: 36,
+  },
+  separator: {
+    marginVertical: 10,
+    height: 1,
+    width: "80%",
   },
 });
 

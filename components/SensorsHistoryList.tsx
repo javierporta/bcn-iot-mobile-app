@@ -1,5 +1,7 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
+import moment from "moment";
 import React, { ReactElement, useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -12,8 +14,11 @@ import {
   View,
 } from "react-native";
 import { ListItem } from "react-native-elements/dist/list/ListItem";
+import Colors from "../constants/Colors";
 import { API_URL } from "../consts/apiUrls";
+import { TabBarIcon } from "../navigation/BottomTabNavigator";
 import { RootStackParamList, TabOneParamList } from "../types";
+import { MonoText } from "./StyledText";
 
 const SensorsHistoryList = (): ReactElement => {
   const [isLoading, setLoading] = useState(true);
@@ -42,12 +47,28 @@ const SensorsHistoryList = (): ReactElement => {
   }, []);
 
   const Item = ({ ...data }: TemperatureAndHumiditySensor) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{data.mac}</Text>
-      <Text style={styles.title}>{data.temperature}</Text>
-      <Text style={styles.title}>{data.humidity}</Text>
-      <Text style={styles.title}>{data.timestamp}</Text>
-    </View>
+    <LinearGradient colors={["#1fe4f5", "#3fbafe"]} style={styles.item}>
+      <MonoText style={styles.title}>
+        <TabBarIcon name="hardware-chip-outline" color="#fff" />
+        <View style={styles.separator}></View>
+        {data.mac}
+      </MonoText>
+      <MonoText style={styles.title}>
+        <TabBarIcon name="thermometer-outline" color="#fff" />
+        <View style={styles.separator}></View>
+        {data.temperature}ºC
+      </MonoText>
+      <MonoText style={styles.title}>
+        <TabBarIcon name="cloud-circle-outline" color="#fff" />
+        <View style={styles.separator}></View>
+        {data.humidity}%
+      </MonoText>
+      <MonoText style={styles.title}>
+        <TabBarIcon name="time-outline" color="#fff" />
+        <View style={styles.separator}></View>
+        {moment(data.timestamp).format("DD/MM/YYYY hh:mm:ss")}
+      </MonoText>
+    </LinearGradient>
   );
 
   interface RenderItemProps {
@@ -114,15 +135,21 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
   item: {
-    backgroundColor: "#f9c2ff",
-    height: 150,
+    height: 200,
     justifyContent: "center",
     marginVertical: 8,
     marginHorizontal: 16,
     padding: 20,
+    borderRadius: 10,
+    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
+    transition: "all 0.5s",
   },
   title: {
-    fontSize: 32,
+    fontSize: 26,
+    color: "#fff",
+  },
+  separator: {
+    width: 10,
   },
 });
 export default SensorsHistoryList;

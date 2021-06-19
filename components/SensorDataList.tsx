@@ -10,10 +10,12 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
   VirtualizedList,
 } from "react-native";
 import { API_URL } from "../consts/apiUrls";
+import { TabBarIcon } from "../navigation/BottomTabNavigator";
 import { RootStackParamList, TabOneParamList } from "../types";
 import { MonoText } from "./StyledText";
 
@@ -67,12 +69,18 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
 
   const Item = ({ title }: ItemProps) => (
     <View>
-      <LinearGradient colors={["#1fe4f5", "#3fbafe"]} style={styles.item}>
-        <Text style={styles.subtitle}>MAC</Text>
-        <Text style={styles.title} onPress={() => goToDetailsScreen(title)}>
-          {title}
-        </Text>
-      </LinearGradient>
+      <TouchableHighlight
+        underlayColor=""
+        onPress={() => goToDetailsScreen(title)}
+      >
+        <LinearGradient colors={["#1fe4f5", "#3fbafe"]} style={styles.item}>
+          <Text style={styles.cardIcon}>
+            <TabBarIcon name="hardware-chip-outline" color="#fff" />
+          </Text>
+          <Text style={styles.cardSubtitle}>MAC</Text>
+          <Text style={styles.cardTitle}>{title}</Text>
+        </LinearGradient>
+      </TouchableHighlight>
     </View>
   );
 
@@ -88,12 +96,18 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
 
   return (
     <>
-      <MonoText>Hey {clientData?.name}!</MonoText>
       {isLoading ? (
-        <ActivityIndicator />
+        <>
+          <MonoText>Loading your data</MonoText>
+          <ActivityIndicator />
+        </>
       ) : (
         <>
-          <MonoText>These are your devices</MonoText>
+          <MonoText style={styles.title}>
+            Hey <strong>{clientData?.name}</strong>!
+          </MonoText>
+          <MonoText style={styles.subTitle}>These are your devices</MonoText>
+          <View style={styles.separator} />
           <View
             style={{
               flex: 1,
@@ -120,12 +134,6 @@ const SensorDataList = ({ navigation }: SensorDataListProps): ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   cards: {
     flex: 1,
     marginTop: StatusBar.currentHeight,
@@ -140,18 +148,31 @@ const styles = StyleSheet.create({
     boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.25)",
     transition: "all 0.5s",
   },
-
   title: {
+    fontSize: 26,
+  },
+  subTitle: {
+    fontSize: 22,
+  },
+  cardTitle: {
     fontSize: 32,
     fontFamily: "space-mono",
     color: "#fff",
     textAlign: "center",
   },
-  subtitle: {
+  cardSubtitle: {
     fontSize: 16,
     fontFamily: "space-mono",
     color: "#fff",
     textAlign: "center",
+  },
+  cardIcon: {
+    textAlign: "center",
+  },
+  separator: {
+    marginVertical: 10,
+    height: 1,
+    width: "80%",
   },
 });
 export default SensorDataList;
